@@ -452,3 +452,142 @@ console.log(1 + Number("1"));  // 2
 One extremely important consideration with respect to JavaScript's type coercion is the issue of equality. You might recall that there are two ways to check if two things are equal in JavaScript: == and ===. The important thing to realize is that using == implicitly coerces data types! This means that 1 == "1" will return true. In reality, these two things are not equal: one is a string and the other is a number. To get the proper result, you must use ===. This is why it's considered a best practice to always use === when checking equality unless you have a specific reason not to. Doing so will ensure that you will never end up with two things that are not really equal being treated as equal because JavaScript coerced them to the same data type.
 
 Type coercion is a double edged sword. It is helpful because it allows us to assume things and write less verbose code, allowing JavaScript to do some of the work for us, but it also opens the door to difficult to detect bugs since unlike its counterparts that do not implicitly coerce data types, JavaScript will not throw an error when you try to perform operations on data types that are really not compatible.
+
+## Storing Values
+Assignment operators in JavaScript are used to assign or reassign values to a variable.
+(let, const or var) and a value to assign:
+- let x = 1;
+- const x = 1;
+- var x = 1;
+```
+[keyword] [variableName] [operator] [value];
+   let           x           =         1   ;
+```   
+
+```
+Operator	  Description	  Example	  Same As
+=	Assignment	let x = 5;	x = 5
++=	Addition Assignment	x += 3	x = x + 3
+-=	Subtraction Assignment	x -= 3	x = x - 3
+*=	Multiplication Assignment	x *= 3	x = x * 3
+/=	Division Assignment	x /= 3	x = x / 3
+%=	Remainder Assignment	x %= 3	x = x % 3
+**=	Exponentiation Assignment	x **= 3	x = x ** 3
+```
+```
+let x = 10; 
+
+x += 1;   // 10 + 1 = 11
+x -= 1;   // 10 - 1 = 9
+x *= 2;   // 10 * 2 = 20
+x /= 2;   // 10 / 2 = 5
+x %= 3;   // 10 % 3 = 1 (returns the remainder of 10/3 = 1)
+x **= 3;  // 10 ** 3 = 1000 
+```
+
+### Basic Math With Arithmetic Operators
+PEMDAS
+- PE: Parentheses and exponents
+- MD: Multiplication and Division
+- AS: Addition and subtraction
+```
+let x = 2;
+let y = 3;
+let z = 4;
+
+console.log(x + y * z);  // 2 + 12 = 14
+console.log((x+y) * z);  // 5 * 4 = 20
+```
+```
+Operator	  Description	  Usage	  Example
++	Addition	result = a + b	2 + 2 = 4
+-	Subtraction	result = a - b	2 - 2 = 0
+*	Multiplication	result = a * b	2 * 5 = 10
+/	Division	result = a / b	10 / 2 = 5
+**	Exponentiation	result = a ** b	2 ** 3 = 8
+%	Modulo (returns the remainder)	result = a % b	10 % 4 = 2
+```
+### Incrementing & Decrementing
+You can use the increment and decrement operators to declare a new variable and increment/decrement the original one simultaneously, too, by using them either as a prefix or a postfix. If used postfix, with operator after operand (for example, x++), the increment operator increments and returns the value before incrementing. If used prefix, with operator before operand (for example, ++x), the increment operator increments and returns the value after incrementing. The following examples are from the MDN website article on incrementing:
+```
+Postfixing:
+
+let x = 3;
+y = x++;
+
+// y = 3
+// x = 4
+```
+```
+Prefixing:
+
+let x = 3;
+y = ++x;
+
+// y = 4
+// x = 4
+```
+
+### Comparing Values With Comparison Operators
+```
+Operator	  Description	  JavaScript Example	  Returns
+==	Equal to (loose equality)	console.log(1 == 1)	true
+===	Equal to (strict equality)	console.log(1 === "1")	false
+!=	Not equal to (loose equality)	console.log(1 != 1)	false
+!==	Not equal to (strict equality)	console.log(1 !== "1")	true
+>	Greater than	console.log(2 > 1)	true
+<	Less than	console.log(2 < 1)	false
+>=	Greater than or equal to	console.log(2 >= 1)	true
+<=	Less than or equal to	console.log(2 <= 1)	false
+```
+
+### Determining Truth With Logical Operators
+
+- The && Operator:
+```
+a	    b	    a && b
+true	true	true
+true	false	false
+false	true	false
+false	false	false
+```
+
+- The || Operator:
+```
+a	    b	    a || b
+true	true	true
+true	false	true
+false	true	true
+false	false	false
+```
+
+- The ! Operator:
+```
+a	    !a
+true	false
+false	true
+```
+logical operators have a precedence just like the arithmetic operators. ! has the highest precedence, followed by && and then ||. If you need to override the precedence, you can wrap whatever you want to execute first in parentheses in order to give it priority
+```
+let a = true;
+let b = true;
+let c = false;
+let d = false;
+
+a && b && c && d         // Operators are executed left to right
+a || b && c || d         // b && c is evaluated first
+(a || b) && (c || d)     // a || b is evaluated, then c || d, then the &&
+!(a || b) && (c || d)    // same as above, but (a || b) is negated before the && is evaluated
+```
+
+### Equality vs. Strict Equality
+- == (Loose Equality): Compares values after coercing them to compatible types
+- === (Strict Equality): Compares values without type coercion, comparing the data type as well
+```
+let a = 1;
+let b = "1";
+
+a == b   // true
+a === b  // false
+```
+you should always use strict equality (===) for testing equality in JavaScript unless you have a specfic reason not to. By doing this, you ensure that you will never inadvertently convert any of the items you're comparing to different data types. If you need to determine whether two objects are exactly the same object, **you can also use Object.is()**, which is similar to the **Python is operator** shown in the image here. The Object.is() operator takes two parameters which are the two objects to compare, and returns a boolean depending on whether they are the same object.
