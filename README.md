@@ -1,6 +1,8 @@
 # JavaScript
 To run a file use "node filename.js"
-## Variables
+## JavaScript Variables
+node variables.js
+### Variables
 - use camelCase
 - let myVar = "a variable";
 - const myVar = "a variable";
@@ -139,7 +141,8 @@ function myFunction() {
   }
 }
 ```
-## Strings
+## Working with Strings in JavaScript
+### Strings
 ```
 let singleQuotedString = 'He\'s a wild one, that single quoted string...';
 let doubleQuotedString = "Confucius say, \"Many backslash make code sad.\"";
@@ -294,6 +297,7 @@ console.log(myString[len - 5]);  // b
 ```
 
 ## JavaScript-Specific Data Types
+node dataType.js
 ### Determining the Data Type
 ```
 typeof(1);                        // "number"
@@ -453,7 +457,9 @@ One extremely important consideration with respect to JavaScript's type coercion
 
 Type coercion is a double edged sword. It is helpful because it allows us to assume things and write less verbose code, allowing JavaScript to do some of the work for us, but it also opens the door to difficult to detect bugs since unlike its counterparts that do not implicitly coerce data types, JavaScript will not throw an error when you try to perform operations on data types that are really not compatible.
 
-## Storing Values
+## JavaScript-Specific Operators
+node StoringValLogicalOpsEqualityAndMore.js
+### Storing Values With Assignment Operators
 Assignment operators in JavaScript are used to assign or reassign values to a variable.
 (let, const or var) and a value to assign:
 - let x = 1;
@@ -592,7 +598,9 @@ a === b  // false
 ```
 you should always use strict equality (===) for testing equality in JavaScript unless you have a specfic reason not to. By doing this, you ensure that you will never inadvertently convert any of the items you're comparing to different data types. If you need to determine whether two objects are exactly the same object, **you can also use Object.is()**, which is similar to the **Python is operator** shown in the image here. The Object.is() operator takes two parameters which are the two objects to compare, and returns a boolean depending on whether they are the same object.
 
-## If/Else Statements
+## JavaScript Flow Control
+node ifElse.js
+### If/Else Statements
 ```
 if (condition) {
   // code if true
@@ -762,5 +770,126 @@ if (condition) {
     // executes if both condition and anotherCondition are false
   }
 
+}
+```
+
+## JavaScript Iteration
+node loops.js
+### For Loop
+```
+for (initializingExpression, condition, incrementingExpression) {
+  // code to repeat
+}
+```
+```
+let fruits = ['apples', 'oranges', 'bananas', 'cherries'];
+let numberOfFruits = fruits.length;
+
+for (let i = 0; i < numberOfFruits; i++) {
+  console.log(fruits[i] + ' are delicious!');
+}
+
+console.log('I love fruit!');
+```
+
+### While
+```
+while (conditon) {
+  // code to repeat
+}
+```
+```
+let fruits = ['apples', 'oranges', 'bananas', 'cherries'];
+let numberOfFruits = fruits.length;
+
+let i = 0;
+while (i < numberOfFruits) {
+  console.log(fruits[i] + ' are delicious!');
+  i++;
+}
+
+console.log('I love fruit!');
+```
+### Do/While Loops
+```
+let i = 10;
+do {
+  console.log('checking i...');
+  console.log('i is', i);
+} while (i < 10);
+console.log('Loop complete');
+```
+
+### Controlling Iteration (Break & Continue)
+- break: breaks out of the loop entirely.
+- continue: continues with the next iteration of the loop, effectively "skipping" an iteration.
+```
+let i = 0;
+while (i <= 1000000) {
+  if (i === 5) {
+    console.log('Breaking!');
+    break;
+  }
+  console.log(i);
+  i++;
+}
+console.log('Loop has been broken.');
+```
+```
+for (let i = 0; i <= 1000000; i++) {
+  if (i === 5) {
+    console.log('Breaking!');
+    break;
+  }
+  console.log(i);
+}
+console.log('Loop has been broken.');
+```
+Alternatively, you can use the continue statement to skip an iteration of the loop under a certain condition. For example, consider a situation where you only want to log even numbers between 0 and 10:
+```
+for (let i = 0; i <= 10; i++) {
+  if (i % 2 !== 0) {
+    continue;
+  }
+  console.log(i);
+}
+console.log('Loop complete.');
+```
+
+Labelling:
+In the event you're working with a nested loop, you can label your loops in order to continue or break a specific label:
+```
+let i = 0;
+iLoop:
+  while (i <= 1000000) {
+    let j = 0;
+    jLoop:
+      while (j <= 100) {
+        if (j === 3) {
+          console.log('Breaking the outer loop from the inner loop.');
+          break iLoop;
+        }
+        console.log('j is', j);
+        j++;
+      }
+
+    if (i === 5) {
+      console.log('Breaking!');
+      break;
+    }
+
+    console.log('i is', i);
+    i++;
+  }
+console.log('Loop has been broken.');
+```
+
+### Nested Iteration
+```
+for (let x = 0; x < 3; x++) {
+  for (let y = 0; y < 3; y++) {
+    let point = [x, y];
+    console.log(point);
+  }
 }
 ```
