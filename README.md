@@ -567,7 +567,7 @@ a	    !a
 true	false
 false	true
 ```
-logical operators have a precedence just like the arithmetic operators. ! has the highest precedence, followed by && and then ||. If you need to override the precedence, you can wrap whatever you want to execute first in parentheses in order to give it priority
+logical operators have precedence just like the arithmetic operators. ! has the highest precedence, followed by && and then ||. If you need to override the precedence, you can wrap whatever you want to execute first in parentheses to give it priority
 ```
 let a = true;
 let b = true;
@@ -591,3 +591,176 @@ a == b   // true
 a === b  // false
 ```
 you should always use strict equality (===) for testing equality in JavaScript unless you have a specfic reason not to. By doing this, you ensure that you will never inadvertently convert any of the items you're comparing to different data types. If you need to determine whether two objects are exactly the same object, **you can also use Object.is()**, which is similar to the **Python is operator** shown in the image here. The Object.is() operator takes two parameters which are the two objects to compare, and returns a boolean depending on whether they are the same object.
+
+## If/Else Statements
+```
+if (condition) {
+  // code if true
+} else {
+  // code if false
+}
+```
+```
+let a = 1;
+let b = 2;
+let firstGreater;
+
+if (a > b) {
+  firstGreater = true; 
+} else {
+  firstGreater = false;
+}
+console.log(firstGreater);
+```
+
+### Ternary Expressions in JavaScript
+Standard conditional statement:
+```
+if (condition) {
+  // code if true
+} else {
+  // code if false
+}
+```
+Equivalent ternary expression:
+```
+condition ? code if true : code if false
+```
+
+Ternary expressions are best used for simple conditonals. Because the expression is all on one line, they are not really good for situations where you want to execute multiple lines of code based on one of the conditions. While it's certainly possible to do this with the strategic use of parentheses and semicolons, it is not recommended because the whole point of the ternary is to make your code more concise and easier to read. The most common use for a ternary expression is in assigning a value to a variable where the value you want to assign is dependent on a condition:
+```
+let myConditionalVariable = someCondition ? trueValue : falseValue
+```
+
+```
+let memberType = 'basic';
+let price = memberType === 'basic' ? 5 : 10;
+```
+
+```
+let memberType = 'basic';
+let price;
+
+if (memberType === 'basic') {
+  price = 5;
+} else {
+  price = 10;
+}
+```
+Equivalent ternary expression:
+These expressions can be chained together to test multiple conditions as well, demonstrated here in a ternary conditional that adds a couple more plans to the above logic.
+```
+let memberType = 'elite';
+let price = memberType === 'basic' ? 5
+          : memberType === 'pro' ? 10
+          : memberType === 'elite' ? 20
+          : 0;
+```
+
+### Multiple Conditions (If/Else If/Else)
+```
+if (condition 1) {
+  // condition 1 true code
+} else if (condition 2) {
+  // condition 2 true code
+} else if (condition 3) {
+  // condition 3 true code
+} else if (condition n) {
+  // condition n true code
+} else {
+  // default code
+}
+```
+```
+let memberType = 'elite';
+let price;
+
+if (memberType === 'basic') {
+  price = 5;
+} else if (memberType === 'pro') {
+  price = 10;
+} else if (memberType === 'elite') {
+  price = 20;
+} else {
+  price = 0;
+}
+console.log(price);  // 20
+```
+
+### Switch Case Statements
+```
+switch (expression) {
+  case 'value1':
+    // code block 1
+    break;
+  case 'value2':
+    // code block 2
+    break;
+  case 'valuen':
+    // code block n
+    break;
+  default:
+    // default result
+}
+```
+```
+let day;
+let dayNumber = 2;
+
+switch (dayNumber) {
+  case 0:
+    day = 'Sunday';
+    break;
+  case 1:
+    day = 'Monday';
+    break;
+  case 2:
+    day = 'Tuesday';
+    break;
+  case 3:
+    day = 'Wednesday';
+    break;
+  case 4:
+    day = 'Thursday';
+    break;
+  case 5:
+    day = 'Friday';
+    break;
+  case 6:
+    day = 'Saturday';
+    break;
+  default:
+    day = 'Invalid day number';
+}
+
+console.log(day);  // Tuesday
+```
+In a function we'll use return instead of break, but obviously, this depends on the situation.
+
+### Nested If/Else Statements
+```
+if (condition) {
+
+  if (anotherCondition) {
+    // executes if both condition and anotherCondition are true
+  } else {
+    // executes if condition is true and anotherCondition is false
+  }
+
+} else {
+  // executes if condition is false
+}
+You can also do this within the else block:
+
+if (condition) {
+  // executes if condition is true
+} else {
+
+  if (anotherCondition) {
+    // executes if condition is false and anotherCondition are true
+  } else {
+    // executes if both condition and anotherCondition are false
+  }
+
+}
+```
