@@ -292,3 +292,163 @@ console.log(myString[len - 3]);  // s
 console.log(myString[len - 4]);  // e
 console.log(myString[len - 5]);  // b
 ```
+
+## JavaScript-Specific Data Types
+### Determining the Data Type
+```
+typeof(1);                        // "number"
+typeof('Hello world!');           // "string"
+typeof(true);                     // "boolean"
+typeof(['a', 'b', 'c']);          // "object"
+typeof({name: 'John', age: 30});  // "object"
+```
+```
+if (typeof myData === "string") {
+  // do something only if myData is a string
+}
+```
+### Number
+The Number is one of the primitive data types in JavaScript
+While other languages have different types of numbers such as integers (whole numbers), floating point (decimal) numbers and so on, in JavaScript every number is just a number.
+**In JavaScript, every number is a floating point number.** That means that unlike in other languages, an integer when compared with it's decimal equivalent will be the same:
+```
+let myInteger = 123;
+let myDecimal = 123.0;
+console.log(myInteger === myDecimal);  // true
+```
+#### Number()
+Number() will convert another value such as a string, boolean, or other data type into a number
+- Falsy values will be converted to zero
+- truthy values will be converted to 1
+- values that cannot be converted to a number will be converted to NaN
+- numbers greater than or equal to 1.8 x 10^308 will be converted to the constant Infinity (or -Infinity if the number is negative)
+```
+Number("123");       // 123
+Number(null);        // 0
+Number(true);        // 1
+Number("Hello!");    // NaN (Not a Number)
+Number(1.8e308);     // Infinity
+Number(-1.8e308);    // -Infinity
+```
+```
+Method/Property	  Purpose	  Usage	  Result
+Number.isNaN()	Returns whether the passed value is Not a Number	isNaN("Hello!");	true
+Number.isFinite()	Returns whether the passed value is finite	isFinite(Infinity);	false
+Number.isInteger()	Returns whether the passed value is an integer	isInteger(123);	true
+Number.parseFloat()	Attempts to convert the passed value to a float	parseFloat("123.45");	123.45
+Number.parseInt()	Attempts to convert the passed value to an integer	parseInt("123.45");	123
+The following are instance methods which operate on a Number instance
+toFixed()	Returns a string representing the number with the passed number of decimal places	123.45.toFixed(4);	"123.4500"
+toPrecision()	Returns a string representing the number with the passed precision	123.45.toPrecision(4);	"123.5"
+toString()	Returns a string representing the number in the specified base (10 by default)	123.45.toString();	"123.45"
+```
+### Note about float
+You learned in the last unit that every number in JavaScript is a floating point number. This means that JavaScript math (or any floating-point math, for that matter), isn't 100% accurate. This is because there are some decimal numbers that cannot be represented perfectly in binary (the language of computers). You cannot represent the fraction 1/3 perfectly in the base 10 (decimal) system: 0.333333...
+```
+Issue
+let decimal = 0.1;
+let otherDecimal = 0.2;
+let sum = decimal + otherDecimal
+
+console.log(sum);  // 0.30000000000000004
+```
+```
+Potential solution
+console.log(0.1 + 0.2);  // 0.30000000000000004
+console.log((0.1 * 10 + 0.2 * 10) / 10);  // 0.3
+
+console.log(1.03 + 1.04);  // 2.0700000000000003
+console.log((1.03 * 100 + 1.04 * 100) / 100);  // 2.07
+```
+
+### Null
+null is another of JavaScript's primitive data types and is a representation of the intentional absense of any object value. This means that, effectively, null is used when you want to explicitly represent "nothing". It is often used as the indication that an object could exist, but currently explicitly does not. This is not the same as undefined, which means that an object does exist but it doesn't have any value associated with it.
+
+null is simple to represent. Any time you wish to explicitly declare a value that represents nothing, just declare it as null:
+```
+let myVariable = null;
+```
+Above, the declaration of null means that the variable myVariable points to no object. null is falsy in a boolean context and can be used to determine truth:
+```
+let myVar = null;
+console.log(Boolean(myVar));  // false
+
+if (myVar) {
+  // will not run; null is falsy
+}
+```
+In a practical sense, you will almost always use null as the condition in a conditional statement, using it to make decisions based on whether a variable is null or not. It can, however, be used to "wipe out" a variable's value. If you want to eliminate a variable's value, just assign null to it. In the future, you may also use it as a substitute for zero-values when writing APIs, because in many cases (for example in a financial context), if a value doesn't exist, representing it as zero is not accurate and may create inaccuracies in financial calculations. Instead, API developers often use null where an object could be expected, but none currently exists.
+### undefined
+The JavaScript undefined property is used to represent any object that has either not been assigned a value or has not been declared at all. It is a property of the global object and is one of JavaScript's primitive data types. undefined is always available as a variable in the global scope, but is not configurable, manipulatable or enumerable. It is only used to represent a variable or other object which has not been assigned a value or which has not been declared.
+
+The easiest way to understand undefined is with a simple example. Usually, developers declare and assign variables in a single step, like let x = 1;. Suppose however that you declare a variable but do not assign it any value:
+```
+let x;
+```
+In this case, the default value assigned to x is undefined. This is confirmed by logging x to the console:
+```
+let x;
+console.log(x);  // undefined
+```
+Checking explicitly using strict equality:
+```
+let x;
+if (x === undefined) {
+  // this will execute
+}
+```
+Using the typeof operator:
+```
+let x;
+if (typeof x === "undefined") {
+  // this will execute
+}
+```
+You'll learn in a future unit why we're using === as opposed to == above, but for now, just understand that as a best practice you should always check equality using === because it verifies that the type of the objects is equal also. undefined is falsy in a boolean context, so like null, you can use it to determine truth and make decisions. ***The difference between null and undefined is that null represents an object which has explicitly been assigned a value of nothing, while undefined is a representation that something has either not been declared or has not been assigned a value. It is "unclear" what it is, so it is considered to be undefined.***
+
+### Infinity, -Infinity and NaN
+- Infinity: a special constant representing any number larger than about 1.8x10^308
+- Infinity: a special constant representing any number smaller than about -1.8x10^308
+- NaN: any value which is Not a Number.
+
+isFinite(): returns true if the number is not Infinity or -Infinity
+
+```
+let finite = isFinite(12345);
+let infinite = isFinite(1.9e308);
+
+console.log(finite);    // true
+console.log(infinite);  // false
+```
+
+isNaN(): returns true if the passed value is not a number (Note: if you pass a number as a string (e.g. '12345') to isNaN(), it will return false because the string will be coerced, or converted, to a number before it is evaluated. You'll learn more about how this type coercion works in the next unit)
+```
+let passingString = isNaN("hello!");
+let passingNumber = isNaN(12345);
+let passingNumberAsString = isNaN('12345');
+
+console.log(passingString);          // true
+console.log(passingNumber);          // false
+console.log(passingNumberAsString);  // false ('12345' is coerced to a Number) ???????? But why see Type Coercion
+```
+### Type Coercion
+Type coercion in JavaScript is the implicit/automatic conversion of one data type to another. Since JavaScript is a weakly typed language, JavaScript will automatically convert data types to different data types as needed. For example, in JavaScript when you add a string to a number, the number is implicitly converted to a string, and the result is actually the concatenation of the two strings:
+```
+console.log(1 + "1");  // "11"
+```
+This is in contrast to languages like Python which do not do this and will instead throw an error, letting you know that it's not possible to add a number and a string together. In the above case, the result "11" is not correct. This also happens in other situations even if two of the same data type are involved in an operation that would normally return a different type. Consider the addition of a series of booleans:
+```
+console.log(true + false);        // 1
+console.log(true + true + true);  // 3
+```
+Do you see what's going on here? Because the addition operator normally returns a number, and the sum of some number of booleans can't be represented any other way, JavaScript converts the booleans to their binary values (1 for true and 0 for false) and then adds them together. Thus, the first line is converted to 1 + 0, which equals 1, and the second is converted to 1 + 1 + 1 which equals 3. This even happens when adding two numbers together, in some situations
+
+To resolve the above issues, sometimes you'll need to explicitly convert the values you're working with into the proper data type before manipulating them. To resolve the issue with adding a number to a string, either remove the quotation marks from around the string or use the built-in Number() method to convert it to a number:
+```
+console.log(1 + "1");          // "11"
+console.log(1 + 1);            // 2
+console.log(1 + Number("1"));  // 2
+```
+One extremely important consideration with respect to JavaScript's type coercion is the issue of equality. You might recall that there are two ways to check if two things are equal in JavaScript: == and ===. The important thing to realize is that using == implicitly coerces data types! This means that 1 == "1" will return true. In reality, these two things are not equal: one is a string and the other is a number. To get the proper result, you must use ===. This is why it's considered a best practice to always use === when checking equality unless you have a specific reason not to. Doing so will ensure that you will never end up with two things that are not really equal being treated as equal because JavaScript coerced them to the same data type.
+
+Type coercion is a double edged sword. It is helpful because it allows us to assume things and write less verbose code, allowing JavaScript to do some of the work for us, but it also opens the door to difficult to detect bugs since unlike its counterparts that do not implicitly coerce data types, JavaScript will not throw an error when you try to perform operations on data types that are really not compatible.
