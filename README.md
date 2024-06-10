@@ -893,3 +893,131 @@ for (let x = 0; x < 3; x++) {
   }
 }
 ```
+
+## Working With JavaScript Data Structures
+In Python, we call them lists.
+node dataStructures.js
+### Arrays
+Declare the array directly using square brackets:
+```
+let myArray = [value 1, value 2, ... value n];
+```
+Declare the array using the Array() constructor:(It's recommended that you always use the first method above to declare arrays, since the second method can produce unexpected results.)
+```
+let myArray = new Array(value 1, value 2, ... value n);
+```
+```
+let cars = ['saab', 'volvo', 'ford'];
+console.log(cars[0]);  // 'saab'
+console.log(cars[1]);  // 'volvo'
+console.log(cars[2]);  // 'ford'
+```
+.length property to reference the total number of items in the array:
+```
+let lotsOfElements = ['a', 'b', 'c', 'd', 'e', 'f'];
+console.log(lotsOfElements.length);
+
+for (let i = 0; i < lotsOfElements.length; i++) {
+  console.log(lotsOfElements[i]);
+}
+```
+#### Array Methods
+- Popping(pop an item off the end of an array) and pushing elements(push one or more onto the end)
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+let lastItem = fruits.pop();
+
+console.log(lastItem);
+console.log(fruits);
+
+let newLength = fruits.push('mangoes');
+console.log(newLength);
+console.log(fruits);
+```
+- Shifting(you can pop an item off the front of the array using the shift() method) and unshifting elements(you can add one or more items to the beginning of the array using the unshift())
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+let firstItem = fruits.shift();
+
+console.log(firstItem);
+console.log(fruits);
+
+let newLength = fruits.unshift('mangoes');
+console.log(newLength);
+console.log(fruits);
+```
+- Deleting and splicing elements(you can delete an item by passing its index to the delete keyword)
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+delete fruits[2];
+console.log(fruits);
+```
+If you run the code though, you'll see it **doesn't actually delete the item, it replaces it with undefined**. The **correct way to truly delete a specific item in an array is to use the splice() method**. To use splice, you specify the **index you would like to begin at and the number of items you want to remove**:
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+fruits.splice(2, 1);  // Remove one item starting at index 2
+console.log(fruits);
+```
+You can **also use splice() to insert elements** into the array at the starting index, by specifying the elements you want to insert in a comma-separated list after the 2nd argument:
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+
+// Remove 'cherries', insert 'pineapples' and 'mangoes'
+// 'bananas' is shifted to the right
+fruits.splice(2, 1, 'pineapples', 'mangoes');
+console.log(fruits);
+```
+**If you don't want to replace any items, but just want to splice some items into the array starting at a specific point, you can specify 0 for the second argument:**
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+
+// Insert 'pineapples' and 'mangoes' starting at index 2
+// 'cherries' is shifted to the right
+fruits.splice(2, 0, 'pineapples', 'mangoes');
+console.log(fruits);
+```
+- Changing the values of specific elements
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+fruits[2] = 'pineapples';
+console.log(fruits);
+```
+- Slicing, sorting and merging
+Using the slice() method. The following slices the array and returns only indices 2 through 4 (not including 4). This does not modify the original array:
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+let subset = fruits.slice(2, 4);
+console.log(fruits);
+console.log(subset);
+```
+The sort() method will sort the array, by default, from lowest to highest or in alphabetical order. The sorting methodology will differ based on the contents of the array, but usually you will use this to sort numerically or alphabetically:
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+fruits.sort();
+console.log(fruits);
+```
+merge two arrays together using the concat()method
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+let vegetables = ['carrots', 'peas', 'beans', 'lettuce'];
+let healthyFoods = fruits.concat(vegetables);
+
+console.log(fruits);
+console.log(vegetables);
+console.log(healthyFoods);
+```
+- Testing whether an array includes an element
+includes() method, which will return true if the element exists in the array, and false otherwise:
+```
+let fruits = ['apples', 'pears', 'cherries', 'bananas', 'peaches', 'oranges'];
+let hasApples = fruits.includes('apples');  // true
+let hasMangoes = fruits.includes('mangoes');  // false
+console.log(hasApples);
+console.log(hasMangoes);
+```
+- Mapping and reducing
+```
+.map(): executes a given function on every single element of the array. An example might be capitalizing all the elements of an array, or multipling them all by some number.
+.filter(): filters the array down to only elements that meet specific criteria. An example might be filtering a list of names down to only names that begin with a certain letter.
+.reduce(): reduces all the array elements down to a single result based on a given formula. An example might be reducing an array of numbers down to their sum, by addng them all together.
+```
