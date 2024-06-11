@@ -1021,3 +1021,374 @@ console.log(hasMangoes);
 .filter(): filters the array down to only elements that meet specific criteria. An example might be filtering a list of names down to only names that begin with a certain letter.
 .reduce(): reduces all the array elements down to a single result based on a given formula. An example might be reducing an array of numbers down to their sum, by addng them all together.
 ```
+
+### Objects
+Dictionaries in python
+```
+let object = {
+  property1: value1,
+  property2: value2,
+  property3: value1,
+  ...
+  propertyN: valueN
+}
+```
+#### Computed Property names
+Computed property names allow you to put a value or an expression in brackets [], which will be computed and used as a objects key.
+
+In the previous lessons on objects, you learned about object keys and values, and how you can create either an empty object and then create the keys and values.
+```
+let person = {}
+person.name = "john";
+console.log(person.name) → john
+```
+Or you can create the same object as follows
+```
+let person = {name: "john"};
+console.log(person.name) → john
+```
+Computed property names gives us another way to do this, so let"s look at an example.
+```
+let prop = "name";
+let person = {[prop]: "john"};
+```
+So we have created a variable and we want the value assigned to it to be the name of a key in the person object and to do this we have added the variable name wrapped in [] in the object where we would normally place the key.
+
+So now if you log out person.name you would get john even though looking at the object there is no key name.
+```
+console.log(person.name) → john
+```
+But you can also access that value of that key like
+```
+console.log(person[prop]) → john
+```
+So we can see from doing: let prop = "name" using [prop] in the object is the same as doing {name: "John"}
+
+So that was using a value as a computed property, what is using an expression as a computed property?
+
+Let"s adjust our example.
+```
+let prop = "name";
+let person = {
+    [prop]: "john", 
+    lastName: "smith",
+    ["full" + prop]: "john smith"
+};
+```
+Ok so we have added ["full" + prop]: "john smith" So now we have a computed expression and the key evaluates to fullname
+```
+console.log(person.fullname) → john smith
+```
+Why learn this? When what you have been taught does the same and probably is easier to understand? For most cases when working with objects you will not use this syntax.
+
+We have shown you so that you will recognise this syntax {[prop]: value}. You may see it in production code or if you study the JavaScript React framework later on. You won't need this now, but you can always refer back to it for a refresher later.
+
+#### Getting & Setting Object Properties
+You can access these property names using either square bracket notation (myObject['someProperty']) or dot notation (myObject.someProperty), though the latter is the preferred way in modern JavaScript.
+```
+let person = {
+  firstName: 'John',
+  lastName: 'Smith',
+  age: 30,
+  location: 'USA'
+}
+```
+There are four things we can do with this person object:
+
+- Read its properties
+- Create new properties
+- Update its existing properties
+- Delete its properties
+
+Read its properties
+```
+console.log(person['firstName']);  // 'John'
+console.log(person.lastName);  // 'Smith'
+```
+Create new properties
+```
+person['bestFriend'] = 'Mike';
+console.log(person['bestFriend']);  // 'Mike'
+
+person.wife = 'Mary';
+console.log(person.wife);  // 'Mary'
+
+console.log(person);
+```
+Update its existing properties
+```
+person['age'] = 31;
+console.log(person['age']);  // 31
+
+person.location = 'Spain';
+console.log(person.location);  // 'Spain'
+```
+Delete its properties
+```
+delete person['lastName'];
+delete person.age;
+console.log(person);
+```
+Note: Trying to access a property that doesn't exist will not throw an error; it will return undefined. Technically, any property that doesn't exist on an object will be undefined, so while accessing a property that has been deleted will still return undefined, if you log the object to the console the property is gone. For all intents and purposes, deleting an object property does effectively remove the property from the object.
+
+
+#### Object Methods
+1. Static methods
+Static methods are methods that exist on the Object constructor itself. They usually take an object as an argument and return some property or characteristic of that object. Common static methods you may use include Object.keys() and Object.values(), which return the passed object's properties and values, respectively. Another common static method is Object.entries(), which returns an array of the object's property/value pairs.
+- First, you can use the static methods Object.keys() and Object.values() to get the object's properties (keys) and values, respectively. Object.entries() can also be used to achieve the same thing, but returns the result in an array of property/value pairs. 
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+};
+
+console.log(Object.keys(car));
+// returns ["location", "ignition", "fueled"]
+
+// Unsupported on JavaScript Tutor
+console.log(Object.values(car));
+// returns ["garage", "off", true]
+
+console.log(Object.entries(car));  
+// returns [Array(2), Array(2), Array(2)]
+// Expanded view of the three arrays:
+// 0: (2) ["location", "garage"]
+// 1: (2) ["ignition", "off"]
+// 2: (2) ["fueled", true]
+```
+2. Instance methods
+Instance methods on the other hand are methods that require a specific object instance to operate on. Two you will probably use are Object.instance.hasOwnProperty(), which returns whether an object has a property in its own definition (rather than inheriting it from another object) and Object.instance.toString(), which returns a string representation of the object.
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+};
+
+console.log(car.hasOwnProperty('ignition'));  // true
+console.log(car.hasOwnProperty('drive'));  // false
+```
+You can also use the toString() method to return a string representation of the object:
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+};
+console.log(car.toString());
+```
+Notice how the representation returned is [object Object]. This is because we haven't defined the toString() method on this specific object (the car), so it's inherited from the global object which all objects inherit from. You'll learn to override this in the next unit.
+3. Methods you create
+Methods you create are instance methods that you yourself have added as properties on the object. This type of method is a just a property on the object whose value is a function that you can call in order to execute some code.
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+  start: function() {
+    this.ignition = 'on';
+  }
+};
+
+console.log(car.ignition);
+car.start();
+console.log(car.ignition);
+```
+This jumps ahead a little bit but it's pretty simple to understand. We just created a property called start just like creating any other property, except this time its value is a function instead of a string, boolean, integer, or something else. The this in the start method refers to the car object itself, so when we call the function by using car.start();, ignition is changed to on. The function doesn't return anything, it just changes the ignition property to on.
+
+#### The 'this' Keyword
+At the end of the last unit you saw how you can create an object (a car) and give it a start() method. In that method there was a reference to the this keyword:
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+  start: function() {
+    this.ignition = 'on';
+  }
+};
+console.log(car.ignition);
+car.start();
+console.log(car.ignition);
+```
+In the above code, this refers to the object it is a part of: the car. The this keyword has different meanings depending on the context in which it is used, but you'll most likely see it used in two main ways:
+
+In a method, this refers to the object that owns the method. If the method isn't owned by any object, then this refers to the global object.
+In an event (like when a user clicks on something), this refers to the element that received the event (e.g. the thing they clicked on).
+Let's look at some examples of the above scenarios. The first item in the list above is exactly what you've seen with the car object in the previous unit. The start() method is owned by the car object, so within that method, this refers to the car. That means that any time we want to access a property of the car we can use this to reference it. To demonstrate, let's add some more methods to the car:
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+  start: function() {
+    this.ignition = 'on';
+  },
+  drive: function() {
+    this.location = 'street';
+  },
+  park: function() {
+    this.location = 'garage';
+  },
+  refuel: function() {
+    this.location = 'gas station';
+    this.fueled = true;
+  },
+  stop: function() {
+    this.ignition = 'off';
+  },
+};
+```
+Above, the bolded references to this.ignition, this.location and this.fueled refer to those properties on the car object. Because the car "owns" all those methods (start, stop, refuel and so on), this refers to the car, and allows you to access it from inside each method to modify the car's properties.
+```
+// Now we can "use" the car:
+car.start();
+console.log(car.ignition);
+car.drive();
+console.log(car.location);
+
+// Ran out of gas!
+car.fueled = false;
+car.refuel();
+console.log(car.location);
+console.log(car.fueled);
+
+// Let's go home
+car.drive();
+console.log(car.location);
+car.park();
+console.log(car.location);
+car.stop();
+console.log(car);
+```
+Again, throughout the above code the keyword this always refers to the car, so we can use it to perform all sorts of operations on the car's other properties. If someone renamed the car object to something else, like truck, everything would still work with the new name since the reference to the object itself is stored in this. However, if you take one of the methods out of the car object and assign it in the global context, it no longer has any reference to the car, so this becomes undefined:
+```
+let car = {
+  location: 'garage',
+  ignition: 'off',
+  fueled: true,
+  start: function() {
+    this.ignition = 'on';
+  },
+  // ...
+};
+
+// car.start is a function, so really
+// all we're doing here is defining it again
+// under a new name to demonstrate this concept
+let myStartFunction = car.start;
+myStartFunction();  // TypeError
+```
+In JavaScript Tutor, this code will throw an error because once the start() function is removed from the car object, the connection between this and the car is gone, so this no longer has an ignition property.
+
+The second common way you'll use this is to refer to an HTML element. You'll see this a lot, since you will often use JavaScript to handle events within the context of HTML elements. In this context, this refers to the element you're operating on. You'll explore this further in later units but here's an example:
+```
+<button onclick="this.style.color='blue'">Click to Change My Text Color!</button>
+```
+When you click the button, its text changes to blue since thanks to the onclick property on the button object which sets this.style.color to blue. As you work with JavaScript more and more, you'll often find yourself making changes to HTML elements and in this context you should remember that this always refers to the element itself. In the above code, it refers to the button, allowing the user to change its text color when clicked.
+
+**this in JavaScript: First, to refer to an object from inside it, and second, to reference an element that a user is interacting with.**
+
+### Iterating Data Structures
+- for
+```
+let food = ['pizza', 'steak', 'pasta', 'fruit salad', 'stir fry'];
+
+for (let i = 0; i < food.length; i++) {
+  console.log(food[i]);
+}
+```
+- for...of
+```
+let food = ['pizza', 'steak', 'pasta', 'fruit salad', 'stir fry'];
+for (let i of food) {
+  console.log(i);
+}
+```
+- for...in
+```
+let food = ['pizza', 'steak', 'pasta', 'fruit salad', 'stir fry'];
+for (let i in food) {
+  console.log('index', i, 'is', food[i]);
+}
+```
+
+If you're working with an object, you can use a for...in loop to iterate over its properties and thus get its values. Here, i refers to the object properties (e.g. dog, cat, fish, python):
+```
+let petNames = {
+  dog: 'Fido',
+  cat: 'Max',
+  fish: 'Bubbles',
+  python: 'Mr. Slithers',
+}
+
+for (let i in petNames){
+  console.log(petNames[i], 'is a', i);
+}
+```
+Another approach
+```
+let petNames = {
+  dog: 'Fido',
+  cat: 'Max',
+  fish: 'Bubbles',
+  python: 'Mr. Slithers',
+}
+
+let pairs = Object.entries(petNames);
+for (let pair of pairs){
+  console.log(pair[1], 'is a', pair[0]);
+}
+```
+
+1. Standard for loop: i is an array index
+2. for...of loop: i is an array element/value
+3. for...in on an array: i is an array index
+4. for...in on an object: i is an object property
+
+### Nested Data Structures
+It is possible and common to nest data structures inside one another. This is common in all programming languages and gives developers a way to create complex arrangements of data, in particular in API development. As you know by now, the two main data structures you'll work with are arrays and objects. There are four ways to nest these structures:
+
+- An array as an array value
+- An object as an array value
+- An array as an object property
+- An object as an object property
+
+1. Array values are accessed by their index in the array in square brackets
+2. Object values are accessed by their property (key) names using dot notation
+- If you can easily identify an array (enclosed in [square brackets]) and an object (enclosed in {curly braces}),
+```
+let company = {
+  name: 'Apple, Inc',
+  founded: 1976,
+  financials: {
+    incomeStatement: {
+      years: [2020, 2019, 2018],
+      revenue: [125, 120, 115],
+      costs: [100, 100, 100],
+      profit: [25, 20, 15]
+    },
+    balanceSheet: {
+      years: [2020, 2019, 2018],
+      assets: [200, 190, 180],
+      liabilties: [100, 95, 90],
+      equity: [100, 95, 90]
+    },
+    cashFlow: {
+      years: [2020, 2019, 2018],
+      operating: [75, 65, 55],
+      investing: [22, 20, 18],
+      financing: [-94, -80, -75]    
+    }
+  },
+  competitors: ['Microsoft', 'Amazon', 'Samsung']
+}
+
+console.log(company.name);
+console.log(company.competitors);
+console.log(company.competitors[0]);
+console.log(company.financials.incomeStatement.years);
+console.log(company.financials.incomeStatement.revenue[0]);
+```
+What about utilizing Math.max() or Math.min() within one of the financial arrays to find their highest profit? How would you find the highest profit's associated year? It's not critical you solve all these problems right now, but consider the approaches you might take to solve them.
