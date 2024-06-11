@@ -1448,3 +1448,15 @@ console.log(sums);
 ### Built-in Functions - Working With Math
 ### Built-in Functions - Working With Date Objects
 ## JavaScript Best Practices
+
+# Introduction to Advanced JavaScript
+ES6 as a whole is nothing but a more succinct syntax for writing JavaScript code. When an application using ES6 runs, the ES6 code is transpiled, or converted, into regular JavaScript.
+
+## Arrow Functions
+node arrowFunctions.js
+
+Usually, ES6 arrow functions are defined as constants.
+This ensures that they can't be overwritten or misused later in the code, and also that
+they must be defined before being called.
+
+for more understanding see arrowFunctions.js file.

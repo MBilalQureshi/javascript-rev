@@ -2,5 +2,5 @@ console.log('-------------- Function  -----------------')
 function addTwoNumbers(num1,num2){
     return num1 + num2; 
  }
- result = addTwoNumbers(40,2)
- console.log(result)
+let result = addTwoNumbers(40,2)
+console.log(result)
