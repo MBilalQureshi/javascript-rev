@@ -1392,3 +1392,59 @@ console.log(company.financials.incomeStatement.years);
 console.log(company.financials.incomeStatement.revenue[0]);
 ```
 What about utilizing Math.max() or Math.min() within one of the financial arrays to find their highest profit? How would you find the highest profit's associated year? It's not critical you solve all these problems right now, but consider the approaches you might take to solve them.
+
+## JavaScript Functions & Objects
+node functions.js
+
+### Taking Parameters & Returning Results
+```
+function addTwo(num1, num2) {
+  return num1 + num2;
+}
+addTwo(3, 5);
+```
+```
+function someFunctionName(p1, p2, ... pN) {
+  // code to execute
+  // can use p1, p2, ... pN as variables
+
+  return someResult;
+}
+```
+### Calling Functions
+```
+// Define an array of arrays (nested data structure)
+let operands = [
+  [3, 5],
+  [8, 6],
+  [1, 2],
+  [9, -2]
+];
+
+// Define a function with parameters
+function addTwo(num1, num2) {
+  return num1 + num2;
+}
+
+// Create an empty array to hold the sums
+let sums = [];
+
+// Use a for loop to iterate the operands and call addTwo()
+for (let pair of operands) {
+  let sum = addTwo(pair[0], pair[1]);  // array indexing + function call
+  sums.push(sum);  // array methods
+}
+
+// Log the sums
+console.log(sums);
+```
+- operands is a nested data structure
+- addTwo() is a function with parameters, which returns a result
+- A for...of loop is used to iterate the operands array of arrays
+- Since each element of the operands array is an array itself, we use array indexing to get each element's first (index 0) and second (index 1) values
+- We pass these values to the addTwo() function as arguments to get their sum, and store it in a variable
+- We use the built in push() method (aka function) to push the sum into the array of sums
+
+### Built-in Functions - Working With Math
+### Built-in Functions - Working With Date Objects
+## JavaScript Best Practices
