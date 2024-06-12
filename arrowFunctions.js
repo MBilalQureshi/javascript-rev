@@ -36,6 +36,13 @@ const multiLine = () => (
 console.log(multiLine());
 
 console.log('-------------- Challenge -----------------')
+// Declare a variable named averagePoints using the keyword const
+// Assign it an arrow function, which should take two parameters named: arr and subject
+// The function should have a return statement
+// Declare a variable named: averageMarks using the keyword let
+// Assign it the return value from calling the function averagePoints, and passing it the students array and one of the following strings: 'maths', 'english', 'cad', 'science', 'art'
+// log out the variable averageMarks to see its value
+// The function should return the correct value no matter which subject is used.
 let students = [
     {
         name: 'John',
