@@ -1468,5 +1468,12 @@ for more understanding see arrowFunctions.js file.
 node spreadOp.js
 Gives us more powerful ways of manipulating JavaScript arrays
 
-By using the ... three dots operator in an array
+By using the ... three dots operator in an array or object
 
+### Rest Parameter Syntax
+node rest.js
+- Allows us to handle the contents of arrays of multiple lengths
+
+- By using the ... three dots rest parameter
+
+- Rest Parameter Syntax works in the opposite  direction from the spread operator. Where the spread operator can break an array into  its individual elements, the rest parameter syntax combines individual elements into an array. It can  also be used to represent the “rest” of the values  
