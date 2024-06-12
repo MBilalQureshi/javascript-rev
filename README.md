@@ -1455,8 +1455,18 @@ ES6 as a whole is nothing but a more succinct syntax for writing JavaScript code
 ## Arrow Functions
 node arrowFunctions.js
 
+Allows us to write more concise JavaScript functions
+
 Usually, ES6 arrow functions are defined as constants.
 This ensures that they can't be overwritten or misused later in the code, and also that
 they must be defined before being called.
 
 for more understanding see arrowFunctions.js file.
+
+## Spread, rest and destructuring 
+### The Spread Operator
+node spreadOp.js
+Gives us more powerful ways of manipulating JavaScript arrays
+
+By using the ... three dots operator in an array
+
