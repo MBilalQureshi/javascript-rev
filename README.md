@@ -1466,9 +1466,9 @@ for more understanding see arrowFunctions.js file.
 ## Spread, rest and destructuring 
 ### The Spread Operator
 node spreadOp.js
-Gives us more powerful ways of manipulating JavaScript arrays
+- Gives us more powerful ways of manipulating JavaScript arrays
 
-By using the ... three dots operator in an array or object
+- By using the ... three dots operator in an array or object
 
 ### Rest Parameter Syntax
 node rest.js
@@ -1476,4 +1476,11 @@ node rest.js
 
 - By using the ... three dots rest parameter
 
-- Rest Parameter Syntax works in the opposite  direction from the spread operator. Where the spread operator can break an array into  its individual elements, the rest parameter syntax combines individual elements into an array. It can  also be used to represent the “rest” of the values  
+- Rest Parameter Syntax works in the opposite  direction from the spread operator. Where the spread operator can break an array into  its individual elements, the rest parameter syntax combines individual elements into an array. It can  also be used to represent the “rest” of the values
+
+### Destructuring
+node destructuring.js
+
+- Allows us to easily turn an array or object into multiple variables
+
+- By separating our variable names with commas
