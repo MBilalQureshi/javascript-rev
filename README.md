@@ -1100,12 +1100,12 @@ There are four things we can do with this person object:
 - Update its existing properties
 - Delete its properties
 
-Read its properties
+- Read its properties
 ```
 console.log(person['firstName']);  // 'John'
 console.log(person.lastName);  // 'Smith'
 ```
-Create new properties
+- Create new properties
 ```
 person['bestFriend'] = 'Mike';
 console.log(person['bestFriend']);  // 'Mike'
@@ -1115,7 +1115,7 @@ console.log(person.wife);  // 'Mary'
 
 console.log(person);
 ```
-Update its existing properties
+- Update its existing properties
 ```
 person['age'] = 31;
 console.log(person['age']);  // 31
@@ -1123,7 +1123,7 @@ console.log(person['age']);  // 31
 person.location = 'Spain';
 console.log(person.location);  // 'Spain'
 ```
-Delete its properties
+- Delete its properties
 ```
 delete person['lastName'];
 delete person.age;
@@ -1476,7 +1476,7 @@ node rest.js
 
 - By using the ... three dots rest parameter
 
-- Rest Parameter Syntax works in the opposite  direction from the spread operator. Where the spread operator can break an array into  its individual elements, the rest parameter syntax combines individual elements into an array. It can  also be used to represent the “rest” of the values
+- Rest Parameter Syntax works in the opposite direction from the spread operator. Where the spread operator can break an array into its individual elements, the rest parameter syntax combines individual elements into an array. It can  also be used to represent the “rest” of the values
 
 ### Destructuring
 node destructuring.js
@@ -1484,3 +1484,22 @@ node destructuring.js
 - Allows us to easily turn an array or object into multiple variables
 
 - By separating our variable names with commas
+
+## Map, filter and reduce
+- map() method executes a provided callback function on each array item and returns a new array containing all the results.
+- The filter() method is for filtering an array. Like the map method, it does this by taking a callback function as a parameter. Each item in the array will be passed into the callback function, and if the callback function returns true when given that element, that element will be included in the results.  Otherwise, the element will be filtered out.
+- reduce() is a more complex method, but its purpose is simple: it reduces all the elements of an array into a single output value, according to a callback function you provide The simplest usage of this method might be if you wanted to reduce an array of numbers to their total sum. In this case, you would call the reduce() method on the array of numbers, and the callback function you pass as its parameter would serve the purpose of adding each number to the last and keeping track of the total.
+
+### What is a callback function?
+a callback function is simply a function that we pass as a parameter to the method, which will be called on every element of the array the method is operating on.
+- Example in map (num => num*2) is call back function below
+```
+let nums = [1,2,3,4,5]
+let result = nums.map(num=>num*2);
+consol.log(result)//[2,4,6,8,10]
+```
+### The map() method
+node map.js
+- Allows us to execute a function on all elements in an array
+- By using the map() method with a callback function
+
