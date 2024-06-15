@@ -1503,3 +1503,9 @@ node map.js
 - Allows us to execute a function on all elements in an array
 - By using the map() method with a callback function
 
+### The filter() method - part 1
+node filter.js
+- Allows us to filter the contents of a JavaScript array which is not needed.
+- By using the filter() method with a callback function.
+
+- The callback function must return a test that will evaluate to either true or false.  If the array item being tested passes the test in the callback function, it will be included in the results returned by the filter method. Otherwise, it'll be filtered out
